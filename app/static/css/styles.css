@@ -1,0 +1,68 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.registration-container {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center; /* Центрируем текст внутри контейнера */
+}
+
+h1 {
+    margin-bottom: 1.5rem;
+    color: #333333;
+    font-size: 1.5rem; /* Увеличиваем размер заголовка */
+}
+
+.form-group {
+    margin-bottom: 1.5rem; /* Увеличиваем отступ между полями */
+    text-align: left; /* Выравниваем текст полей по левому краю */
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #555555;
+    font-size: 0.9rem; /* Уменьшаем размер текста меток */
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    box-sizing: border-box; /* Учитываем padding в ширине */
+}
+
+.form-group input:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+button {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 1rem; /* Добавляем отступ сверху для кнопки */
+}
+
+button:hover {
+    background-color: #0056b3;
+}
