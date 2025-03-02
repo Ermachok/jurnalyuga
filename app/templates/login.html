@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="login-container">
+        <h1>Вход</h1>
+        <form id="login-form">
+            <div class="form-group">
+                <label for="email_or_login">Email или Логин:</label>
+                <input type="text" id="email_or_login" name="email_or_login" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Пароль:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit">Войти</button>
+        </form>
+        <p>Еще нет аккаунта? <a href="/api/users/register">Зарегистрируйтесь</a></p>
+    </div>
+
+    <script>
+        document.getElementById('login-form').addEventListener('submit', async function(event) {
+            event.preventDefault(); // Предотвращаем стандартное поведение формы
+
+            const emailOrLogin = document.getElementById('email_or_login').value;
+            const password = document.getElementById('password').value;
+
+            // Отправка данных на сервер
+            try {
+                const response = await fetch('/api/users/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        email_or_login: emailOrLogin,
+                        password: password,
+                    }),
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.detail || 'Ошибка при входе');
+                }
+
+                const data = await response.json();
+                alert('Вход выполнен успешно!');
+
+                // Сохраняем данные пользователя в localStorage
+                localStorage.setItem('user', JSON.stringify({
+                    id: data.user_id,
+                    login: emailOrLogin, // Или другое поле, например, имя пользователя
+                }));
+
+                // Перенаправляем на страницу профиля
+                window.location.href = '/profile';
+            } catch (error) {
+                alert(error.message);
+                console.error('Ошибка:', error);
+            }
+        });
+    </script>
+</body>
+</html>
