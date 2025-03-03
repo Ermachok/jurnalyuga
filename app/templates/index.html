@@ -5,27 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Добро пожаловать!</title>
     <style>
-        body {
-            background: url('/static/images/stella_main.jpg') repeat;
-            background-size: 5% auto;
-            color: black;
+        body, html {
+            margin: 0;
+            padding: 0;
             font-family: "Arial", sans-serif;
             text-align: center;
-            background-color: #f4f4f4;
-            height: 80vh;
+            height: 100%;
             overflow-y: scroll;
+        }
+
+        section {
+            height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-        }
-        h1, p, a {
             color: yellow;
-        }
-        h1 {
             text-shadow: 2px 2px 4px #666;
+        }
+
+        .section1 {
+            background: url('/static/images/stella_main.jpg') repeat;
+            background-size: 6% auto;
+        }
+
+        .section2 {
+            background: url('/static/images/stella_weird_looking.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
+
+       .section3 {
+        background: url('/static/images/jurnalyuga.jpg') no-repeat center center fixed;
+        background-size: 100% 100%;
+        background-color: #f4f4f4;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: yellow;
+        text-shadow: 2px 2px 4px #666;
+        }
+
+        h1 {
             font-size: 36px;
         }
+
         a {
             font-size: 20px;
             font-weight: bold;
@@ -34,20 +59,25 @@
             padding: 8px;
             border: 2px solid #bbb;
             border-radius: 5px;
+            color: black;
         }
+
         a:hover {
             color: white;
             background: #777;
         }
+
         table {
             width: 80%;
             border: 3px solid #aaa;
             background: #e0e0e0;
         }
+
         td {
             padding: 15px;
             border: 2px solid #999;
         }
+
         .dancer {
             margin-top: 20px;
             width: 30%;
@@ -56,13 +86,25 @@
     </style>
 </head>
 <body>
-    <h1>Добро пожаловать!</h1>
-    <table>
-        <tr>
-            <td><a href="/api/users/login">Войти</a></td>
-            <td><a href="/api/users/register">Зарегистрироваться</a></td>
-        </tr>
-    </table>
-    <img class="dancer" src="/static/images/funny_pugs_main.gif" alt="Танцующие мопсы">
+    <section class="section1">
+        <h1>Добро пожаловать!</h1>
+        <table>
+            <tr>
+                <td><a href="/api/users/login">Войти</a></td>
+                <td><a href="/api/users/register">Зарегистрироваться</a></td>
+            </tr>
+        </table>
+        <img class="dancer" src="/static/images/funny_pugs_main.gif" alt="Танцующие мопсы">
+    </section>
+
+    <section class="section2">
+        <h1>Раздел 2</h1>
+        <p>Это второй раздел с другим фоном.</p>
+    </section>
+
+    <section class="section3">
+        <h1>Раздел 3</h1>
+        <p>Это третий раздел с еще одним уникальным фоном.</p>
+    </section>
 </body>
 </html>
