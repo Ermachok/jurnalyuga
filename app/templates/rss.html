@@ -1,21 +1,15 @@
 {% extends "base.html" %}
 
-{% block title %}RSS Новости{% endblock %}
+{% block title %}Новости{% endblock %}
 
 {% block content %}
-<div class="container">
-    <h1 class="mt-4 mb-3">Новости из RSS</h1>
-
-    {% for news in news_items %}
-    <div class="card mb-3">
-        <div class="card-body">
-            <h5 class="card-title">
-                <a href="{{ news.link }}" target="_blank">{{ news.title }}</a>
-            </h5>
-            <p class="card-text">{{ news.description | safe }}</p>
-            <p class="card-text"><small class="text-muted">Опубликовано: {{ news.published }}</small></p>
-        </div>
+    <div class="news-container">
+        {% for news in news_list %}
+            <div class="news-item">
+                <h3><a href="{{ news.link }}" target="_blank">{{ news.title }}</a></h3>
+                <p>{{ news.description | safe }}</p>
+                <small><em>Опубликовано: {{ news.published }}</em></small>
+            </div>
+        {% endfor %}
     </div>
-    {% endfor %}
-</div>
 {% endblock %}

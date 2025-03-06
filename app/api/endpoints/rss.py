@@ -3,20 +3,17 @@ import feedparser
 
 router = APIRouter(prefix="/api/rss")
 
-RSS_FEED_URL = "https://habr.com/ru/rss/all/all/"
+RSS_FEED_URL = "https://habr.com/ru/rss/all/all/?limit=100"
 
 
-@router.get("/")
-def get_rss_feed(request: Request):
+async def get_rss_feed():
     feed = feedparser.parse(RSS_FEED_URL)
-    news_items = []
-
-    for entry in feed.entries:
-        news_items.append({
+    return [
+        {
             "title": entry.title,
-            "description": entry.description,
+            "description": entry.summary,
             "link": entry.link,
             "published": entry.published,
-        })
-
-    return news_items
+        }
+        for entry in feed.entries
+    ]

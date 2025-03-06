@@ -1,49 +1,73 @@
+/* === Базовые стили === */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
     margin: 0;
     padding: 0;
+    background-color: #f4f4f4;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
 }
 
+/* === Шапка и навигация === */
+header {
+    background: #333;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+nav a {
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+    font-size: 0.95rem;
+}
+
+/* === Основной контент === */
+main {
+    width: 80%;
+    margin: 100px auto 20px; /* Учтена фиксированная шапка */
+    padding: 20px;
+    background: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+/* === Форма регистрации === */
 .registration-container {
     background-color: #ffffff;
     padding: 2rem;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 100%;
     max-width: 400px;
-    text-align: center; /* Центрируем текст внутри контейнера */
-}
-
-h1 {
-    margin-bottom: 1.5rem;
-    color: #333333;
-    font-size: 1.5rem; /* Увеличиваем размер заголовка */
+    margin: 20px auto;
 }
 
 .form-group {
-    margin-bottom: 1.5rem; /* Увеличиваем отступ между полями */
-    text-align: left; /* Выравниваем текст полей по левому краю */
+    margin-bottom: 1.5rem;
+    text-align: left;
 }
 
 .form-group label {
     display: block;
     margin-bottom: 0.5rem;
-    color: #555555;
-    font-size: 0.9rem; /* Уменьшаем размер текста меток */
+    color: #555;
+    font-size: 0.9rem;
 }
 
 .form-group input {
     width: 100%;
     padding: 0.75rem;
-    border: 1px solid #cccccc;
+    border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 1rem;
-    box-sizing: border-box; /* Учитываем padding в ширине */
+    box-sizing: border-box;
 }
 
 .form-group input:focus {
@@ -51,18 +75,92 @@ h1 {
     outline: none;
 }
 
+/* === Новости === */
+.news-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.news-item {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+    max-width: 100%; /* Ограничение ширины */
+    overflow: hidden; /* Обрезает выходящие за границы элементы */
+}
+
+.news-item h3 {
+    margin: 0 0 10px 0;
+}
+
+.news-item a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.news-item a:hover {
+    text-decoration: underline;
+}
+
+.news-item img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 10px 0;
+}
+
+.news-item p img {
+    max-width: 100%;
+    height: auto;
+}
+
+.news-description img {
+    max-width: 100%;
+    height: auto;
+}
+
+
+/* === Кнопки (общие стили) === */
 button {
     width: 100%;
     padding: 0.75rem;
     background-color: #007bff;
-    color: #ffffff;
+    color: white;
     border: none;
     border-radius: 4px;
     font-size: 1rem;
     cursor: pointer;
-    margin-top: 1rem; /* Добавляем отступ сверху для кнопки */
+    transition: background-color 0.3s;
 }
 
 button:hover {
     background-color: #0056b3;
+}
+
+/* === Адаптивность === */
+@media (max-width: 768px) {
+    main {
+        width: 95%;
+        padding: 15px;
+        margin-top: 80px; /* Уменьшен отступ для мобильных */
+    }
+
+    .registration-container {
+        padding: 1.5rem;
+    }
+
+    .news-item {
+        padding: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    nav a {
+        margin: 0 10px;
+        font-size: 0.85rem;
+    }
+
+    .form-group input {
+        padding: 0.6rem;
+    }
 }

@@ -34,17 +34,15 @@
             background-size: cover;
         }
 
-       .section3 {
-        background: url('/static/images/jurnalyuga.jpg') no-repeat center center fixed;
-        background-size: 100% 100%;
-        background-color: #f4f4f4;
-        height: 100vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        color: yellow;
-        text-shadow: 2px 2px 4px #666;
+        .section3 {
+            background: url('/static/images/jurnalyuga.jpg') no-repeat center center fixed;
+            background-size: 100% 100%;
+            background-color: #f4f4f4;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
         h1 {
@@ -83,6 +81,28 @@
             width: 30%;
             height: auto;
         }
+
+        .button-container {
+            display: flex;
+            gap: 20px;
+        }
+
+        .btn {
+            font-size: 20px;
+            font-weight: bold;
+            text-decoration: none;
+            background: #ddd;
+            padding: 10px 20px;
+            border: 2px solid #bbb;
+            border-radius: 5px;
+            color: black;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            color: white;
+            background: #777;
+        }
     </style>
 </head>
 <body>
@@ -103,8 +123,11 @@
     </section>
 
     <section class="section3">
-        <h1>Раздел 3</h1>
-        <p>Это третий раздел с еще одним уникальным фоном.</p>
+        <div class="button-container">
+            <a href="/api/rss" class="btn">Habr</a>
+            <a href="#" class="btn">Заглушка 1</a>
+            <a href="#" class="btn">Заглушка 2</a>
+        </div>
     </section>
 </body>
 </html>

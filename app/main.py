@@ -31,5 +31,5 @@ async def register_page(request: Request):
 
 @app.get("/rss")
 async def rss_page(request: Request):
-    news_items = await rss.get_rss_feed()
-    return templates.TemplateResponse("rss.html", {"request": request, "news": news_items})
+    news_list = await rss.get_rss_feed()
+    return templates.TemplateResponse("rss.html", {"request": request, "news_list": news_list})
