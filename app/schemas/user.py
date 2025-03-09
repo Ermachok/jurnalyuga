@@ -13,7 +13,8 @@ class UserLogin(BaseModel):
 
 
 class UserLoginResponse(BaseModel):
-    result: bool
+    access_token: str
+    token_type: str
 
 
 class UserRegistrationResponse(BaseModel):

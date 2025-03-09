@@ -1,3 +1,5 @@
+from datetime import datetime, timedelta
+from jose import JWTError, jwt
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
@@ -5,6 +7,18 @@ from sqlalchemy.future import select
 from app.database import get_db_session
 from app.models.user import User
 from app.schemas.user import UserRegistration, UserRegistrationResponse, UserLogin, UserLoginResponse
+
+SECRET_KEY = "VERYSECRETKEY"
+ALGORITHM = "HS256"
+ACCESS_TOKEN_EXPIRE_MINUTES = 30
+
+
+def create_access_token(data: dict, expires_delta: timedelta | None = None):
+    to_encode = data.copy()
+    expire = datetime.now() + (expires_delta or timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES))
+    to_encode.update({"exp": expire})
+    return jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
+
 
 router = APIRouter(prefix="/api/users", tags=["Users"])
 
@@ -47,16 +61,11 @@ async def login_user(user_data: UserLogin, db: AsyncSession = Depends(get_db_ses
     )
     user = user.scalar_one_or_none()
 
-    if not user:
+    if not user or not user.check_password(user_data.password):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Неверный email/логин или пароль",
         )
 
-    if not user.check_password(user_data.password):
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Неверный email/логин или пароль",
-        )
-
-    return UserLoginResponse(result=True)
+    access_token = create_access_token({"sub": user.login})
+    return UserLoginResponse(access_token=access_token, token_type='bearer')

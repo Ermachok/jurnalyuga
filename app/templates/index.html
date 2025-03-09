@@ -103,17 +103,18 @@
             color: white;
             background: #777;
         }
+
+        .hidden { display: none; }
     </style>
 </head>
 <body>
     <section class="section1">
         <h1>Добро пожаловать!</h1>
-        <table>
-            <tr>
-                <td><a href="/api/users/login">Войти</a></td>
-                <td><a href="/api/users/register">Зарегистрироваться</a></td>
-            </tr>
-        </table>
+        <div id="auth-buttons">
+            <a href="/api/users/login" id="login-btn">Войти</a>
+            <a href="/api/users/register" id="register-btn">Зарегистрироваться</a>
+        </div>
+        <a href="#" id="logout-btn" class="hidden">Выйти</a>
         <img class="dancer" src="/static/images/funny_pugs_main.gif" alt="Танцующие мопсы">
     </section>
 
@@ -131,7 +132,19 @@
     </section>
 
     <script>
+        function updateUI() {
+            const token = localStorage.getItem("jwt");
+            document.getElementById("auth-buttons").classList.toggle("hidden", !!token);
+            document.getElementById("logout-btn").classList.toggle("hidden", !token);
+        }
+
+        document.getElementById("logout-btn").addEventListener("click", function () {
+            localStorage.removeItem("jwt");
+            updateUI();
+        });
+
         document.addEventListener("DOMContentLoaded", function () {
+            updateUI();
             if (window.location.hash === "#news-section") {
                 const section = document.getElementById("news-section");
                 if (section) {

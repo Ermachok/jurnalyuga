@@ -119,7 +119,8 @@
                     id: data.user_id,
                     login: emailOrLogin,
                 }));
-                window.location.href = '/profile';
+                localStorage.setItem("jwt", data.access_token);
+                window.location.href = '/';
             } catch (error) {
                 alert(error.message);
                 console.error('Ошибка:', error);
