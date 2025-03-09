@@ -65,23 +65,6 @@
             background: #777;
         }
 
-        table {
-            width: 80%;
-            border: 3px solid #aaa;
-            background: #e0e0e0;
-        }
-
-        td {
-            padding: 15px;
-            border: 2px solid #999;
-        }
-
-        .dancer {
-            margin-top: 20px;
-            width: 30%;
-            height: auto;
-        }
-
         .button-container {
             display: flex;
             gap: 20px;
@@ -105,17 +88,26 @@
         }
 
         .hidden { display: none; }
+
+        @keyframes blink {
+            0% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0.2;
+            }
+        }
+
     </style>
 </head>
 <body>
     <section class="section1">
         <h1>Добро пожаловать!</h1>
         <div id="auth-buttons">
-            <a href="/api/users/login" id="login-btn">Войти</a>
-            <a href="/api/users/register" id="register-btn">Зарегистрироваться</a>
+            <a href="/api/users/login" id="login-btn" class="btn">Войти</a>
+            <a href="/api/users/register" id="register-btn" class="btn">Зарегистрироваться</a>
         </div>
         <a href="#" id="logout-btn" class="hidden">Выйти</a>
-        <img class="dancer" src="/static/images/funny_pugs_main.gif" alt="Танцующие мопсы">
     </section>
 
     <section class="section2">
@@ -145,12 +137,6 @@
 
         document.addEventListener("DOMContentLoaded", function () {
             updateUI();
-            if (window.location.hash === "#news-section") {
-                const section = document.getElementById("news-section");
-                if (section) {
-                    section.scrollIntoView({ behavior: "smooth" });
-                }
-            }
         });
     </script>
 </body>
