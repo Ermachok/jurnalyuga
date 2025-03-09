@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 
-{% block title %}Reddit новости{% endblock %}
+{% block title %}NYT Sports Новости{% endblock %}
 
 {% block nav_links %}
     <a href="/#news-section">Все новости</a>
     <a href="/rss_habr">Habr</a>
-    <a href="/rss_nyt_sports">NYT sports</a>
+    <a href="/rss_reddit">Reddit</a>
 {% endblock %}
 
 {% block content %}
@@ -14,7 +14,7 @@
             <div class="news-item">
                 <h3><a href="{{ news.link }}" target="_blank">{{ news.title }}</a></h3>
                 {% if news.image_url %}
-                    <img src="{{ news.image_url }}" alt="Image for {{ news.title }}" style="width: 30%; height: auto;" />
+                    <img src="{{ news.image_url }}" alt="{{ news.title }}" style="width: 50%; height: auto; display: block; margin: 10px auto;" />
                 {% endif %}
                 <p>{{ news.description | safe }}</p>
                 <small><em>Опубликовано: {{ news.published }}</em></small>

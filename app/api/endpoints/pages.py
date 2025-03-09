@@ -30,3 +30,8 @@ async def rss_page(request: Request):
 async def reddit_rss_page(request: Request):
     news_list = await rss.get_reddit_rss_feed()
     return templates.TemplateResponse("rss_reddit.html", {"request": request, "news_list": news_list})
+
+@router.get("/rss_nyt_sports")
+async def nyt_sports_rss_page(request: Request):
+    news_list = await rss.get_nyt_sports()
+    return templates.TemplateResponse("rss_nyt.html", {"request": request, "news_list": news_list})
