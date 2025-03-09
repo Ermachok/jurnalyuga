@@ -122,12 +122,23 @@
         <p>Это второй раздел с другим фоном.</p>
     </section>
 
-    <section class="section3">
+    <section class="section3" id="news-section">
         <div class="button-container">
-            <a href="/api/rss" class="btn">Habr</a>
-            <a href="#" class="btn">Заглушка 1</a>
+            <a href="/rss_habr" class="btn">Habr</a>
+            <a href="/rss_reddit" class="btn">Reddit</a>
             <a href="#" class="btn">Заглушка 2</a>
         </div>
     </section>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            if (window.location.hash === "#news-section") {
+                const section = document.getElementById("news-section");
+                if (section) {
+                    section.scrollIntoView({ behavior: "smooth" });
+                }
+            }
+        });
+    </script>
 </body>
 </html>

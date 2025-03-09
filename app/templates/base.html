@@ -10,12 +10,25 @@
     <header>
         <h1>Новости</h1>
         <nav>
-            <a href="/">Главная</a>
-            <a href="/rss">Новости</a>
+            {% block nav_links %}
+                <a href="/">Главная</a>
+                <a href="/rss">Новости</a>
+            {% endblock %}
         </nav>
     </header>
     <main>
         {% block content %}{% endblock %}
     </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            if (window.location.hash === "#news-section") {
+                const section = document.getElementById("news-section");
+                if (section) {
+                    section.scrollIntoView({ behavior: "smooth" });
+                }
+            }
+        });
+    </script>
 </body>
 </html>

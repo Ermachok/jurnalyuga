@@ -1,6 +1,12 @@
 {% extends "base.html" %}
 
-{% block title %}Новости{% endblock %}
+{% block title %}Habr новости{% endblock %}
+
+{% block nav_links %}
+    <a href="/#news-section">Все новости</a>
+    <a href="/rss_reddit" >Reddit</a>
+    <a href="#">Заглушка</a>
+{% endblock %}
 
 {% block content %}
     <div class="news-container">

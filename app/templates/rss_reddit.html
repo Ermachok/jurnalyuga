@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Reddit новости{% endblock %}
+
+{% block nav_links %}
+    <a href="/#news-section">Все новости</a>
+    <a href="/rss_habr">Habr</a>
+    <a href="#">Заглушка</a>
+{% endblock %}
+
+{% block content %}
+    <div class="news-container">
+        {% for news in news_list %}
+            <div class="news-item">
+                <h3><a href="{{ news.link }}" target="_blank">{{ news.title }}</a></h3>
+                {% if news.image_url %}
+                    <img src="{{ news.image_url }}" alt="Image for {{ news.title }}" style="width: 30%; height: auto;" />
+                {% endif %}
+                <p>{{ news.description | safe }}</p>
+                <small><em>Опубликовано: {{ news.published }}</em></small>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
