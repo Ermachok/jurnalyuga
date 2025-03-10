@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Добро пожаловать!</title>
+    <title>Сайт антивизитка</title>
     <style>
         body, html {
             margin: 0;
@@ -20,13 +20,68 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            color: yellow;
-            text-shadow: 2px 2px 4px #666;
+            position: relative;
         }
 
         .section1 {
             background: url('/static/images/stella_main.jpg') repeat;
             background-size: 6% auto;
+            padding-top: 50px;
+        }
+
+        .site-title {
+            position: absolute;
+            top: 5px;
+            font-size: 45px;
+            color: yellow;
+            text-shadow: 4px 4px 8px black;
+        }
+
+        .content-container {
+            display: flex;
+            width: 80%;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+        .text-container {
+            width: 30%;
+            font-size: 18px;
+            line-height: 1.6;
+            color: white;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 10px;
+            border-radius: 20px;
+        }
+
+        .auth-container {
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .btn {
+            font-size: 18px;
+            font-weight: bold;
+            text-decoration: none;
+            background: #ddd;
+            padding: 15px 30px;
+            border: 3px solid #bbb;
+            border-radius: 8px;
+            color: black;
+            transition: 0.3s;
+            margin: 10px;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            color: white;
+            background: #777;
         }
 
         .section2 {
@@ -37,100 +92,117 @@
         .section3 {
             background: url('/static/images/jurnalyuga.jpg') no-repeat center center fixed;
             background-size: 100% 100%;
-            background-color: #f4f4f4;
-            height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
         }
 
-        h1 {
-            font-size: 36px;
-        }
-
-        a {
-            font-size: 20px;
-            font-weight: bold;
-            text-decoration: none;
-            background: #ddd;
-            padding: 8px;
-            border: 2px solid #bbb;
+        .news-container {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 15px;
             border-radius: 5px;
-            color: black;
-        }
-
-        a:hover {
             color: white;
-            background: #777;
+            font-size: 18px;
         }
 
         .button-container {
             display: flex;
-            gap: 20px;
+            gap: 25px;
+            margin-top: 20px;
         }
 
-        .btn {
-            font-size: 20px;
-            font-weight: bold;
-            text-decoration: none;
-            background: #ddd;
-            padding: 10px 20px;
-            border: 2px solid #bbb;
-            border-radius: 5px;
-            color: black;
-            transition: 0.3s;
+        .dancer {
+            margin-top: 40px;
+            width: 40%;
+            height: auto;
         }
 
-        .btn:hover {
-            color: white;
-            background: #777;
+        .hidden {
+            display: none;
         }
 
-        .hidden { display: none; }
-
-        @keyframes blink {
-            0% {
-                opacity: 1;
+        @media (max-width: 768px) {
+            .content-container {
+                flex-direction: column;
+                align-items: center;
             }
-            100% {
-                opacity: 0.2;
+
+            .text-container {
+                width: 90%;
+                text-align: center;
+                font-size: 18px;
+            }
+
+            .auth-container {
+                flex-direction: column;
             }
         }
-
     </style>
 </head>
 <body>
     <section class="section1">
-        <h1>Добро пожаловать!</h1>
-        <div id="auth-buttons">
-            <a href="/api/users/login" id="login-btn" class="btn">Войти</a>
-            <a href="/api/users/register" id="register-btn" class="btn">Зарегистрироваться</a>
+        <h1 class="site-title">🚀 Сайт антивизитка 🚀</h1>
+        <div class="content-container">
+            <div class="text-container">
+                <p>
+                    Этот мини-сайтик — демонстрация моих знаний в <strong>веб-разработке</strong>.
+                    Он построен на <strong>FastAPI</strong> —  асинхронном фреймворке для Python.
+                    В качестве базы данных используется <strong>PostgreSQL</strong> в связке с <strong>SQLAlchemy</strong>.
+                </p>
+            </div>
+            <div class="auth-container">
+                <a href="/api/users/login" id="login-btn" class="btn">🔑 Войти</a>
+                <a href="/api/users/register" id="register-btn" class="btn">📝 Зарегистрироваться</a>
+                <a href="#" id="logout-btn" class="btn hidden">🚪 Выйти</a>
+            </div>
+            <div class="text-container">
+                <p>
+                    🔐 <strong>Авторизация</strong> реализована через <strong>JWT-токены</strong>.
+                    Можно зарегистрироваться, придумав <em>любой email</em> и пароль. Если лень, то можно залогиниться по связке
+                    <strong>log: nikita, pas: 123</strong>, и будут вам еще мопсики.
+                </p>
+            </div>
         </div>
-        <a href="#" id="logout-btn" class="hidden">Выйти</a>
+        <img id="dancer" class="dancer hidden" src="/static/images/funny_pugs_main.gif" alt="Танцующие мопсы">
     </section>
 
     <section class="section2">
-        <h1>Раздел 2</h1>
-        <p>Это второй раздел с другим фоном.</p>
+        <h1>🔹 Раздел 2 🔹</h1>
+        <p class="text-container">Здесь мог быть ваш текст, но он убежал в асинхронный мир Python! 🚀</p>
     </section>
 
-    <section class="section3" id="news-section">
+    <section class="section3">
+        <div class="news-container">
+            <p>📰 Изначальная идея этой странички заключалась в том, что когда-то я хотел сделать себе RSS ленту.
+                Потом я от нее отказался, но для успокоения души реализовал парсинг парочки ресурсов.
+                Можно пожмакать  и посмотреть, что там пишет NY Times, ну или хабр с реддитом.</p>
+        </div>
         <div class="button-container">
-            <a href="/rss_habr" class="btn">Habr</a>
-            <a href="/rss_reddit" class="btn">Reddit</a>
-            <a href="/rss_nyt_sports" class="btn">NYT Sports</a>
+            <a href="/rss_habr" class="btn">📜 Habr</a>
+            <a href="/rss_reddit" class="btn">🗨️ Reddit</a>
+            <a href="/rss_nyt_sports" class="btn">⚽ NYT Sports</a>
         </div>
     </section>
 
     <script>
         function updateUI() {
             const token = localStorage.getItem("jwt");
-            document.getElementById("auth-buttons").classList.toggle("hidden", !!token);
+            document.getElementById("login-btn").classList.toggle("hidden", !!token);
+            document.getElementById("register-btn").classList.toggle("hidden", !!token);
             document.getElementById("logout-btn").classList.toggle("hidden", !token);
+
+            const dancer = document.getElementById("dancer");
+            if (dancer) {
+                dancer.classList.toggle("hidden", !token);
+            }
         }
 
-        document.getElementById("logout-btn").addEventListener("click", function () {
+        document.getElementById("logout-btn").addEventListener("click", function (event) {
+            event.preventDefault();
             localStorage.removeItem("jwt");
             updateUI();
         });
