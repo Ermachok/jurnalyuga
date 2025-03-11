@@ -12,7 +12,6 @@ This is a personal website project hosted on a Raspberry Pi. The website provide
 - **Database**: PostgreSQL for storing user data, scores, and progress.
 - **Frontend**: Jinja2Templates
 - **Authentication**: JWT-based authentication for user registration and login.
-- **Hosting**: Runs on Raspberry Pi with Nginx as a reverse proxy.
 
 ## Project Goals
 - Develop a lightweight and responsive website for personal use.
