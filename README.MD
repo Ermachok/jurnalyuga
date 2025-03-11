@@ -1,6 +1,6 @@
-# Personal Website on Raspberry Pi
+# Personal Website 
 
-This is a personal website project hosted on a Raspberry Pi. The website provides a combination of entertainment and utility features, including:
+This is a personal website project. The website provides a combination of entertainment and utility features, including:
 
 ## Features
 - **Registration and authentication**
