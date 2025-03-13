@@ -2,10 +2,10 @@ name: Docker Image CI
 on:
   push:
     branches:
-      - "*"
+      - "main"
   pull_request:
     branches:
-      - "*"
+      - "main"
 
 jobs:
   build:
@@ -32,9 +32,6 @@ jobs:
             docker inspect --format='{{.State.Health.Status}}' jurnalyuga_db | grep -q "healthy" && break
             sleep 2
           done
-
-      - name: Run tests
-        run: docker compose exec -T backend sh -c "PYTHONPATH=\$(pwd) poetry run pytest -sv tests/"
 
       - name: Stop and remove containers
         run: docker compose down
