@@ -1,12 +1,11 @@
 from argon2 import PasswordHasher
 from argon2.exceptions import VerifyMismatchError
-
 from sqlalchemy import Column, Integer, String
-from sqlalchemy.orm import relationship
 
 from app.models.base import Base
 
 ph = PasswordHasher()
+
 
 class User(Base):
     __tablename__ = "users"

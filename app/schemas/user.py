@@ -9,7 +9,7 @@ class UserRegistration(BaseModel):
 
 class UserLogin(BaseModel):
     email_or_login: str
-    password : str
+    password: str
 
 
 class UserLoginResponse(BaseModel):
@@ -19,4 +19,3 @@ class UserLoginResponse(BaseModel):
 
 class UserRegistrationResponse(BaseModel):
     result: bool
-

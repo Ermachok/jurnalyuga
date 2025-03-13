@@ -14,9 +14,13 @@ async def create_test_data():
         if existing_user:
             return
 
-        user0 = User(login="test", email='test@mail.ru', password ='test_pas')
+        user0 = User(login="test", email="test@mail.ru", password="test_pas")
 
-        session.add_all([user0, ])
+        session.add_all(
+            [
+                user0,
+            ]
+        )
         await session.commit()
 
         await session.commit()
