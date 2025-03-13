@@ -17,5 +17,9 @@ async def get_word_of_the_day():
         data = response.json()
         return {
             "word": data.get("word"),
-            "definition": data["definitions"][0]["text"] if data.get("definitions") else "Нет определения"
+            "definition": (
+                data["definitions"][0]["text"]
+                if data.get("definitions")
+                else "Нет определения"
+            ),
         }

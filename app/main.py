@@ -1,8 +1,8 @@
 from fastapi import FastAPI
-from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
 
-from app.api.endpoints import user, rss, pages
+from app.api.endpoints import pages, rss, user
 
 app = FastAPI(title="Jurnalyuga API", redirect_slashes=True)
 

@@ -1,12 +1,18 @@
 from datetime import datetime, timedelta
-from jose import JWTError, jwt
+
 from fastapi import APIRouter, Depends, HTTPException, status
+from jose import jwt
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 
 from app.database import get_db_session
 from app.models.user import User
-from app.schemas.user import UserRegistration, UserRegistrationResponse, UserLogin, UserLoginResponse
+from app.schemas.user import (
+    UserLogin,
+    UserLoginResponse,
+    UserRegistration,
+    UserRegistrationResponse,
+)
 
 SECRET_KEY = "VERYSECRETKEY"
 ALGORITHM = "HS256"
@@ -15,7 +21,9 @@ ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
 def create_access_token(data: dict, expires_delta: timedelta | None = None):
     to_encode = data.copy()
-    expire = datetime.now() + (expires_delta or timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES))
+    expire = datetime.now() + (
+        expires_delta or timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+    )
     to_encode.update({"exp": expire})
     return jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
 
@@ -23,8 +31,14 @@ def create_access_token(data: dict, expires_delta: timedelta | None = None):
 router = APIRouter(prefix="/api/users", tags=["Users"])
 
 
-@router.post("/register", response_model=UserRegistrationResponse, status_code=status.HTTP_201_CREATED)
-async def registrate_user(user_data: UserRegistration, db: AsyncSession = Depends(get_db_session)):
+@router.post(
+    "/register",
+    response_model=UserRegistrationResponse,
+    status_code=status.HTTP_201_CREATED,
+)
+async def registrate_user(
+    user_data: UserRegistration, db: AsyncSession = Depends(get_db_session)
+):
     existing_user = await db.execute(select(User).where(User.email == user_data.email))
     if existing_user.scalar_one_or_none():
         raise HTTPException(
@@ -56,7 +70,8 @@ async def registrate_user(user_data: UserRegistration, db: AsyncSession = Depend
 async def login_user(user_data: UserLogin, db: AsyncSession = Depends(get_db_session)):
     user = await db.execute(
         select(User).where(
-            (User.email == user_data.email_or_login) | (User.login == user_data.email_or_login)
+            (User.email == user_data.email_or_login)
+            | (User.login == user_data.email_or_login)
         )
     )
     user = user.scalar_one_or_none()
@@ -68,4 +83,4 @@ async def login_user(user_data: UserLogin, db: AsyncSession = Depends(get_db_ses
         )
 
     access_token = create_access_token({"sub": user.login})
-    return UserLoginResponse(access_token=access_token, token_type='bearer')
+    return UserLoginResponse(access_token=access_token, token_type="bearer")
