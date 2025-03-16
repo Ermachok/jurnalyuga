@@ -15,5 +15,4 @@ RUN poetry install  --no-root --without dev
 
 
 COPY . .
-
 CMD ["bash", "-c", "poetry run alembic upgrade head && poetry run python app/init_db.py && poetry run uvicorn app.main:app --host 0.0.0.0 --port 8000"]

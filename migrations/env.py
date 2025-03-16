@@ -6,6 +6,9 @@ from sqlalchemy import pool
 from sqlalchemy.engine import Connection
 from sqlalchemy.ext.asyncio import async_engine_from_config
 
+from dotenv import load_dotenv
+import os
+
 from app.models.user import User  # noqa: F401
 
 # this is the Alembic Config object, which provides
@@ -16,6 +19,11 @@ config = context.config
 # This line sets up loggers basically.
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
+
+load_dotenv()
+
+DATABASE_URL = os.getenv("DATABASE_URL")
+config.set_main_option('sqlalchemy.url', DATABASE_URL)
 
 # add your model's MetaData object here
 # for 'autogenerate' support
