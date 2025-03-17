@@ -1,5 +1,5 @@
 from datetime import datetime, timedelta
-
+from app.config.settings import jwt_settings
 from fastapi import APIRouter, Depends, HTTPException, status
 from jose import jwt
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -14,18 +14,14 @@ from app.schemas.user import (
     UserRegistrationResponse,
 )
 
-SECRET_KEY = "VERYSECRETKEY"
-ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 30
-
 
 def create_access_token(data: dict, expires_delta: timedelta | None = None):
     to_encode = data.copy()
     expire = datetime.now() + (
-        expires_delta or timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+            expires_delta or timedelta(minutes=jwt_settings.ACCESS_TOKEN_EXPIRE_MINUTES)
     )
     to_encode.update({"exp": expire})
-    return jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
+    return jwt.encode(to_encode, jwt_settings.SECRET_KEY, algorithm=jwt_settings.ALGORITHM)
 
 
 router = APIRouter(prefix="/api/users", tags=["Users"])
@@ -37,7 +33,7 @@ router = APIRouter(prefix="/api/users", tags=["Users"])
     status_code=status.HTTP_201_CREATED,
 )
 async def registrate_user(
-    user_data: UserRegistration, db: AsyncSession = Depends(get_db_session)
+        user_data: UserRegistration, db: AsyncSession = Depends(get_db_session)
 ):
     existing_user = await db.execute(select(User).where(User.email == user_data.email))
     if existing_user.scalar_one_or_none():
