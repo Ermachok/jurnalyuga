@@ -1,7 +1,9 @@
-from fastapi import APIRouter, HTTPException
-import httpx
 import os
+
+import httpx
 from dotenv import load_dotenv
+from fastapi import APIRouter, HTTPException
+
 from app.schemas.words import WordOfTheDayResponse
 
 load_dotenv()

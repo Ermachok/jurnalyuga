@@ -1,18 +1,16 @@
 from datetime import datetime, timedelta
-from app.config.settings import jwt_settings
+
 from fastapi import APIRouter, Depends, HTTPException, status
 from jose import jwt
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 
+from app.config.settings import jwt_settings
 from app.database import get_db_session
-from app.models.user import User
-from app.schemas.user import (
-    UserLogin,
-    UserLoginResponse,
-    UserRegistration,
-    UserRegistrationResponse,
-)
+from app.dependencies import get_current_user
+from app.models.user import LoginHistory, User
+from app.schemas.user import (UserLogin, UserLoginResponse, UserRegistration,
+                              UserRegistrationResponse)
 
 
 def create_access_token(data: dict, expires_delta: timedelta | None = None):
@@ -78,5 +76,16 @@ async def login_user(user_data: UserLogin, db: AsyncSession = Depends(get_db_ses
             detail="Неверный email/логин или пароль",
         )
 
+    login_entry = LoginHistory(user_id=user.id)
+    db.add(login_entry)
+    await db.commit()
+
     access_token = create_access_token({"sub": user.login})
     return UserLoginResponse(access_token=access_token, token_type="bearer")
+
+
+@router.get("/login-history")
+async def get_login_history(current_user: User = Depends(get_current_user), db: AsyncSession = Depends(get_db_session)):
+    history = await db.execute(
+        select(LoginHistory).where(LoginHistory.user_id == current_user.id).order_by(LoginHistory.timestamp.desc()))
+    return [{"timestamp": entry.timestamp} for entry in history.scalars()]

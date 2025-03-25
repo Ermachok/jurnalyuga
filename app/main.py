@@ -1,9 +1,9 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
-from fastapi.middleware.cors import CORSMiddleware
 
-from app.api.endpoints import pages, rss, user, day_word
+from app.api.endpoints import day_word, pages, rss, user
 
 app = FastAPI(title="Jurnalyuga API", redirect_slashes=True)
 

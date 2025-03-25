@@ -23,8 +23,6 @@ async def create_test_data():
         )
         await session.commit()
 
-        await session.commit()
-
 
 if __name__ == "__main__":
     asyncio.run(create_test_data())

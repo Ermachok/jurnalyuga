@@ -1,6 +1,7 @@
-from pydantic import BaseModel
-from typing import List, Optional
 from dataclasses import field
+from typing import List, Optional
+
+from pydantic import BaseModel
 
 
 class WordOfTheDayResponse(BaseModel):
